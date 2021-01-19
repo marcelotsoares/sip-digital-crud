@@ -5,7 +5,7 @@ async function createUser(payload) {
         if (!payload.nome || !payload.sobrenome || !payload.idade || !payload.cidade || !payload.estado) {
             return {
                 status: 400,
-                message: "Não foi possível criar o usuário"
+                message: "Você precisa passar o Nome, Sobrenome, Idade, Cidade e Estado para criar um novo usuário"
             }
         }
     
@@ -39,7 +39,7 @@ async function getAllUsers() {
         return { status: 201, message: user }
     } catch(error) {
         console.log(error)
-        return { status: 500, message: "Criação de usuário falhou." }
+        return { status: 500, message: "Ocorreu um erro ao pegar os usuários." }
     }
 }
 
@@ -55,7 +55,7 @@ async function updateUser(id, payload) {
         return { status: 200, message: "Usuário atualizado com sucesso!" }
     } catch(error) {
         console.log(error)
-        return { status: 500, message: "Ocorreu algum erro e não foi possível deletar o usuário." }
+        return { status: 500, message: "Ocorreu algum erro e não foi possível atualizar o usuário." }
     }
 }
 

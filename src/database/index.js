@@ -28,8 +28,34 @@ function addDatabaseUser(nome, sobrenome, idade, cidade, estado) {
     });
 }
 
+function selectDatabaseUser(id) {
+    return new Promise((resolve, reject) => {
+        pool.query({
+            sql: 'SELECT * FROM users WHERE user_id = ?',
+            timeout: 40000, // 40s,
+            values: [id]
+        }, function(error, result, fields) {
+            if (error) reject(error);
+                
+            return resolve(result);
+        });
+    });
+}
+
+function getDatabaseAllUsers() {
+    return new Promise((resolve, reject) => {
+        pool.query({
+            sql: 'SELECT * FROM users',
+            timeout: 40000 // 40s,
+        }, function(error, result, fields) {
+            if (error) reject(error);
+                
+            return resolve(result);
+        });
+    });
+}
+
 function updateDatabaseUser(id, payload) {
-    console.log("Call in updateDatabaseUser")
     let sets = ""
     for (let key in payload.update) {
         if (sets) sets += ", "
@@ -54,33 +80,6 @@ function deleteDatabaseUser(id) {
             sql: 'DELETE FROM users WHERE user_id = ?',
             timeout: 40000, // 40s,
             values: [id]
-        }, function(error, result, fields) {
-            if (error) reject(error);
-                
-            return resolve(result);
-        });
-    });
-}
-
-function selectDatabaseUser(id) {
-    return new Promise((resolve, reject) => {
-        pool.query({
-            sql: 'SELECT * FROM users WHERE user_id = ?',
-            timeout: 40000, // 40s,
-            values: [id]
-        }, function(error, result, fields) {
-            if (error) reject(error);
-                
-            return resolve(result);
-        });
-    });
-}
-
-function getDatabaseAllUsers() {
-    return new Promise((resolve, reject) => {
-        pool.query({
-            sql: 'SELECT * FROM users',
-            timeout: 40000 // 40s,
         }, function(error, result, fields) {
             if (error) reject(error);
                 

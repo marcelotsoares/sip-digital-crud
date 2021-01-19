@@ -7,5 +7,5 @@ app.use(bodyParser.json())
 app.use(router)
 
 app.listen(3000, function () {
-    console.log('App listening on porta 3000')
+    console.log('App listening on port 3000')
 })
