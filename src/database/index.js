@@ -57,9 +57,9 @@ function getDatabaseAllUsers() {
 
 function updateDatabaseUser(id, payload) {
     let sets = ""
-    for (let key in payload.update) {
+    for (let key in payload) {
         if (sets) sets += ", "
-        sets += `${key} = "${payload.update[key]}" `
+        sets += `${key} = "${payload[key]}" `
     }
     return new Promise((resolve, reject) => {
         pool.query({
